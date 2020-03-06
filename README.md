@@ -5,8 +5,6 @@ I'm taking the Michigan University 'Python for everybody' course. This repo will
 
 You can download the sample data at http://www.py4e.com/code3/romeo.txt
 
-# codes: 
-
 fname = input("Enter file name: ")
 
 fh = open(fname)
