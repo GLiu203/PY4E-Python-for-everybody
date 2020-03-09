@@ -102,6 +102,7 @@ print(wds, dict[wds])
 From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008
 Once you have accumulated the counts for each hour, print out the counts, sorted by hour as shown below.
 
+
 name = input("Enter file:")
 
 if len(name) < 1 : name = "mbox-short.txt"
@@ -112,30 +113,34 @@ lst = list()
 
 for line in handle:
 
-    if line.startswith("From") and not line.startswith('From:'):
+    if line.startswith('From') and not line.startswith('From:'):
     
-      lst.append(line[-14:-12])
-      
+        line = line[-14:-12]
+        
+        lst.append(line)
+        
 lst.sort()
 
 #print(lst)
 
 counts = dict()
 
-names = lst
+hours = lst
 
-for name in names:
+for hour in hours:
 
-    counts[name] = counts.get(name, 0) + 1
+    if hour not in counts:
+    
+        counts[hour] = 1
+        
+    else:
+    
+        counts[hour] = counts[hour] +1
 
-for  key,values in counts.items():
+for k,v in counts.items():
 
-    print(key, values)
-
-
-
-
-
+    print(k,v)
+    
 ----------------------------------------------------------------------------------------------------------------------------------------
 
 
