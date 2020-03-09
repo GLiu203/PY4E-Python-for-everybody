@@ -142,9 +142,42 @@ for k,v in counts.items():
     print(k,v)
     
 ----------------------------------------------------------------------------------------------------------------------------------------
+11. Finding Numbers in a Haystack
 
+In this assignment you will read through and parse a file with text and numbers. You will extract all the numbers in the file and compute the sum of the numbers.
 
+Data Files
+We provide two files for this assignment. One is a sample file where we give you the sum for your testing and the other is the actual data you need to process for the assignment.
 
+import re
+
+handle = open('actual.txt')
+
+numlist = list()
+
+for line in handle:
+
+    line = line.rstrip()
+    
+    stuff = re.findall('[0-9]+', line)
+    
+    if len(stuff)<1: continue
+    
+    else:
+    
+        for i in stuff:
+        
+            numlist.append(i)
+            
+#print(numlist)
+
+sum = 0
+
+for num in numlist:
+
+    sum += int(num)
+
+print(sum)
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------
