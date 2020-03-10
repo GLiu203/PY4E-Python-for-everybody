@@ -179,48 +179,6 @@ for num in numlist:
 
 print(sum)
 
-
-----------------------------------------------------------------------------------------------------------------------------------------
-13. Extracting Data from XML
-
-In this assignment you will write a Python program somewhat similar to http://www.py4e.com/code3/geoxml.py. The program will prompt for a URL, read the XML data from that URL using urllib and then parse and extract the comment counts from the XML data, compute the sum of the numbers in the file.
-
-import urllib.request as UR
-
-import xml.etree.ElementTree as ET
-
-
-url = input('URL: ')
-
-print('Retrieving', url)
-
-xml = UR.urlopen(url).read()
-
-print('Retrieved', len(xml), 'characters')
-
-count = 0
-
-sum = 0
-
-tree = ET.fromstring(xml)
-
-counts = tree.findall('.//count')
-
-for i in counts:
-
-    count += 1
-    
-    sum += int(i.text)
-
-print('Count:', count)
-
-print('Sum:', sum)
-
-----------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
 ----------------------------------------------------------------------------------------------------------------------------------------
 12.1 Scraping Numbers from HTML using BeautifulSoup In this assignment you will write a Python program similar to http://www.py4e.com/code3/urllink2.py. The program will use urllib to read the HTML from the data files below, and parse the data, extracting numbers and compute the sum of the numbers in the file.
 
@@ -273,11 +231,40 @@ print(count)
 print(sum)
 
 ----------------------------------------------------------------------------------------------------------------------------------------
+13. Extracting Data from XML
+
+In this assignment you will write a Python program somewhat similar to http://www.py4e.com/code3/geoxml.py. The program will prompt for a URL, read the XML data from that URL using urllib and then parse and extract the comment counts from the XML data, compute the sum of the numbers in the file.
+
+import urllib.request as UR
+
+import xml.etree.ElementTree as ET
 
 
+url = input('URL: ')
 
+print('Retrieving', url)
 
+xml = UR.urlopen(url).read()
 
+print('Retrieved', len(xml), 'characters')
+
+count = 0
+
+sum = 0
+
+tree = ET.fromstring(xml)
+
+counts = tree.findall('.//count')
+
+for i in counts:
+
+    count += 1
+    
+    sum += int(i.text)
+
+print('Count:', count)
+
+print('Sum:', sum)
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 
