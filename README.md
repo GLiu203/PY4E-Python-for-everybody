@@ -1,13 +1,11 @@
-# Python-for-everybody-Coursera-
-
-
-I'm taking the Michigan University 'Python for everybody' course. This repo will include my homework codes. 
-
+# Python-for-everybody-Coursera
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 8.4 Open the file romeo.txt and read it line by line. For each line, split the line into a list of words using the split() method. The program should build a list of words. For each word on each line check to see if the word is already in the list and if not append it to the list. When the program completes, sort and print the resulting words in alphabetical order.
 
 You can download the sample data at http://www.py4e.com/code3/romeo.txt
+
+Codes: 
 
 
 fname = input("Enter file name: ")
@@ -40,6 +38,8 @@ Hint: make sure not to include the lines that start with 'From:'.
 You can download the sample data at http://www.py4e.com/code3/mbox-short.txt
 
 
+Codes: 
+
 
 fname = input("Enter file name: ")
 
@@ -68,6 +68,8 @@ print("There were", count, "lines in the file with From as the first word")
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 9.4 Write a program to read through the mbox-short.txt and figure out who has sent the greatest number of mail messages. The program looks for 'From ' lines and takes the second word of those lines as the person who sent the mail. The program creates a Python dictionary that maps the sender's mail address to a count of the number of times they appear in the file. After the dictionary is produced, the program reads through the dictionary using a maximum loop to find the most prolific committer.
+
+Codes: 
 
 name = input("Enter file:")
 
@@ -102,6 +104,7 @@ print(wds, dict[wds])
 From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008
 Once you have accumulated the counts for each hour, print out the counts, sorted by hour as shown below.
 
+Codes: 
 
 name = input("Enter file:")
 
@@ -182,13 +185,13 @@ print(sum)
 ----------------------------------------------------------------------------------------------------------------------------------------
 12.1 Scraping Numbers from HTML using BeautifulSoup In this assignment you will write a Python program similar to http://www.py4e.com/code3/urllink2.py. The program will use urllib to read the HTML from the data files below, and parse the data, extracting numbers and compute the sum of the numbers in the file.
 
+Codes: 
+
 from urllib.request import urlopen
 
 from bs4 import BeautifulSoup
 
 import ssl
-
-
 
 ctx = ssl.create_default_context()
 
@@ -235,10 +238,11 @@ print(sum)
 
 In this assignment you will write a Python program somewhat similar to http://www.py4e.com/code3/geoxml.py. The program will prompt for a URL, read the XML data from that URL using urllib and then parse and extract the comment counts from the XML data, compute the sum of the numbers in the file.
 
+Codes: 
+
 import urllib.request as UR
 
 import xml.etree.ElementTree as ET
-
 
 url = input('URL: ')
 
@@ -265,6 +269,49 @@ for i in counts:
 print('Count:', count)
 
 print('Sum:', sum)
+
+----------------------------------------------------------------------------------------------------------------------------------------
+15. Counting Organizations
+This application will read the mailbox data (mbox.txt) and count the number of email messages per organization (i.e. domain name of the email address) using a database with the following schema to maintain the counts.
+
+CREATE TABLE Counts (org TEXT, count INTEGER)
+
+When you have run the program on mbox.txt upload the resulting database file above for grading.
+If you run the program multiple times in testing or with dfferent files, make sure to empty out the data before each run.
+
+Codes: 
+
+import sqlite3 as sql
+
+conn = sql.connect('mboxDB.sqlite')
+
+cur = conn.cursor()
+
+cur.execute('DROP TABLE IF EXISTS Counts')
+
+cur.execute('CREATE TABLE Counts (org TEXT, count INTEGER)')
+
+fh = open('mbox.txt')
+
+for row in fh:
+
+    if not row.startswith('From:'): continue
+    
+    email = row.split()[1]  # split() return a List.
+    
+    org = email[email.find('@') + 1 :]
+
+    cur.execute('SELECT Count from Counts WHERE org = ?', (org,))
+    
+    num = cur.fetchone()
+        
+    if num is None:
+        cur.execute('INSERT INTO Counts (org, count) VALUES (?, 1)', (org,))
+        
+    else:    
+        cur.execute('UPDATE Counts SET Count = Count + 1 WHERE org = ?', (org,))
+         
+conn.commit()
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 15. Instructions
