@@ -271,7 +271,8 @@ print('Count:', count)
 print('Sum:', sum)
 
 ----------------------------------------------------------------------------------------------------------------------------------------
-15. Counting Organizations
+15.2 Counting Organizations
+
 This application will read the mailbox data (mbox.txt) and count the number of email messages per organization (i.e. domain name of the email address) using a database with the following schema to maintain the counts.
 
 CREATE TABLE Counts (org TEXT, count INTEGER)
@@ -314,7 +315,8 @@ for row in fh:
 conn.commit()
 
 ----------------------------------------------------------------------------------------------------------------------------------------
-15. Instructions
+15.4 Instructions
+
 This application will read roster data in JSON format, parse the file, and then produce an SQLite database that contains a User, Course, and Member table and populate the tables from the data file.
 
 You can base your solution on this code: http://www.py4e.com/code3/roster/roster.py - this code is incomplete as you need to modify the program to store the role column in the Member table to complete the assignment.
